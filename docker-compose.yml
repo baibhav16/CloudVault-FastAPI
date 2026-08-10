@@ -1,0 +1,32 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: cloudvault-postgres
+    environment:
+      POSTGRES_DB: cloudvault
+      POSTGRES_USER: cloudvault
+      POSTGRES_PASSWORD: cloudvault
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: cloudvault-redis
+    ports:
+      - "6379:6379"
+
+  backend:
+    build: ./backend
+    container_name: cloudvault-backend
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - "8000:8000"
+
+volumes:
+  postgres_data:
