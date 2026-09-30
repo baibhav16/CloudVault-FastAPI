@@ -15,4 +15,4 @@ services:
       - key: STORAGE_MODE
         value: local
       - key: CORS_ORIGINS
-        value: '["http://localhost:5173"]'
+        value: '["https://frontend-beige-seven-9zau5j5m3v.vercel.app","http://localhost:5173"]'
