@@ -3,7 +3,7 @@ services:
     name: cloudvault-api
     runtime: docker
     plan: free
-    region: oregon
+    region: singapore
     dockerfilePath: ./backend/Dockerfile
     dockerContext: ./backend
     healthCheckPath: /health
