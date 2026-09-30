@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./styles.css";
 
-const API = "http://localhost:8000/api/v1";
+const API = `${import.meta.env.VITE_API_URL || "http://localhost:8000"}/api/v1`;
 
 // ============================================================
 // TYPES

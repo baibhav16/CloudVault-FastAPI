@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.core.config import settings
 from app.db.database import Base, engine
 from app.models import user, folder, file, share, version
 from app.api.routes import auth, files, folders, shares, versions
@@ -15,13 +16,9 @@ app = FastAPI(
     description="Secure cloud file storage and sharing API",
 )
 
-# CORS configuration for local development
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-    ],
+    allow_origins=settings.cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

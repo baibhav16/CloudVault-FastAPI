@@ -19,6 +19,15 @@ class Settings(BaseSettings):
     redis_url: str = "redis://localhost:6379/0"
     cors_origins: list[str] = ["http://localhost:5173"]
 
+    @property
+    def sqlalchemy_database_url(self) -> str:
+        # Render supplies PostgreSQL URLs with the legacy postgres:// scheme.
+        if self.database_url.startswith("postgres://"):
+            return self.database_url.replace("postgres://", "postgresql+psycopg://", 1)
+        if self.database_url.startswith("postgresql://"):
+            return self.database_url.replace("postgresql://", "postgresql+psycopg://", 1)
+        return self.database_url
+
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
 
